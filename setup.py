@@ -12,6 +12,7 @@ setup(
         'pandas',
         'pytest',
         'setuptools',
+        'pre-commit'
     ],
     entry_points={
         'console_scripts': [
