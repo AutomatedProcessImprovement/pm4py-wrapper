@@ -9,4 +9,5 @@ poetry version $VERSION_RULE
 poetry publish --build
 
 git tag "v$(poetry version -s)"
+git push
 git push --tags
