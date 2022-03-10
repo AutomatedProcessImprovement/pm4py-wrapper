@@ -4,10 +4,11 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "pm4py-wrapper"
-version = "1.1.0"
+version = "1.1.1"
 description = "pm4py wrapper to call the original package from CLI"
 authors = ["Ihar Suvorau <ihar.suvorau@gmail.com>"]
 license = "GPL-3.0"
+readme = "README.md"
 
 [tool.poetry.scripts]
 pm4py_wrapper = "pm4py_wrapper.cli:main"
