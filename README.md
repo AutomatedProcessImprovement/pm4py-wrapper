@@ -10,6 +10,29 @@ Install using [pip](https://pip.pypa.io/en/stable/installation/):
 pip install pm4py-wrapper
 ```
 
+### Known Issues for macOS with M1
+
+#### cvxopt@1.3.0: umfpack.h is missing
+
+- Discussion is at https://github.com/cvxopt/cvxopt/issues/78.
+- Solution:
+  - Install `suite-sparse`
+  - Specify `CPPFLAGS` and `LDFLAGS`
+  - Run `pip install cvxopt`
+- More details at http://cvxopt.org/install/index.html
+
+```shell
+$ brew info suite-sparse
+$ export CPPFLAGS="-I/opt/homebrew/include/"
+$ export LDFLAGS="-L/opt/homebrew/lib"
+$ pip install cvxopt
+```
+
+#### scipy@1.6.1
+
+- Discussion is at https://github.com/scipy/scipy/issues/13409
+- Solution: use a newer version starting from 1.7.0
+
 ## Usage
 
 ```
