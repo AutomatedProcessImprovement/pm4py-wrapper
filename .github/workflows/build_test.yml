@@ -25,12 +25,17 @@ jobs:
         run: |
           source venv/bin/activate
           poetry build
-      - name: Test
-        run: |
-          source venv/bin/activate
-          pytest
       - name: Upload built packages
         uses: actions/upload-artifact@v3
         with:
           name: build-{{ matrix.python-version }}
           path: dist
+      - name: Test
+        run: |
+          source venv/bin/activate
+          pytest --cov=. --junitxml=pytest_coverage.xml --cov-report=term | tee pytest-coverage.log
+      - name: Test Coverage
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: ./pytest-coverage.log
+          junitxml-path: ./pytest_coverage.xml

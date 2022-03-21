@@ -1,5 +1,7 @@
 # pm4py-wrapper
 
+![Build & Test](https://github.com/AutomatedProcessImprovement/pm4py-wrapper/actions/workflows/build_test.yml/badge.svg)
+
 CLI wrapper for pm4py.
 
 ## Installation
