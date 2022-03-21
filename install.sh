@@ -28,7 +28,20 @@ function install_macos() {
 
 function install_linux() {
   apt-get update
-  apt-get install -y build-essential python-dev libopenblas-dev libatlas-base-dev libblas-dev liblapack-dev libdsdp-dev libsuitesparse-dev
+  apt-get install -y \
+    build-essential \
+    python-dev \
+    libopenblas-dev \
+    libatlas-base-dev \
+    libblas-dev \
+    liblapack-dev \
+    libdsdp-dev \
+    libsuitesparse-dev \
+    libssl-dev \
+    libffi-dev \
+    libgsl-dev \
+    libfftw3-dev \
+    libglpk-dev
   export CPPFLAGS="-I/usr/include/suitesparse"
 
   export CVXOPT_BUILD_FFTW=1
