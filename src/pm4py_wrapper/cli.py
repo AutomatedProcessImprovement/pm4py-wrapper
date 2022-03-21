@@ -20,6 +20,7 @@ def xes_to_csv(ctx):
     log_path: Path = ctx.parent.params['input_log']
     output_dir: Path = ctx.parent.params['output_dir']
     output_path = output_dir / log_path.with_suffix('.csv').name
+    output_dir.mkdir(parents=True, exist_ok=True)
     convert_xes_to_csv(log_path, output_path)
 
 
@@ -29,6 +30,7 @@ def csv_to_xes(ctx):
     log_path: Path = ctx.parent.params['input_log']
     output_dir: Path = ctx.parent.params['output_dir']
     output_path = output_dir / log_path.with_suffix('.xes').name
+    output_dir.mkdir(parents=True, exist_ok=True)
     convert_csv_to_xes(log_path, output_path)
 
 

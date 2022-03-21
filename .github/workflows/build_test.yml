@@ -20,7 +20,7 @@ jobs:
           architecture: x64
       - name: Install dependencies
         shell: bash
-        run: ./install.bash linux
+        run: ./install.sh linux
       - name: Build
         run: poetry build
       - name: Test

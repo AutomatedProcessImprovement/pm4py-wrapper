@@ -17,7 +17,7 @@ pip install poetry
 function install_macos() {
   # Solves openblas issue
   brew install gsl fftw suite-sparse glpk
-  export CPPFLAGS="-I/opt/homebrew/include/"
+  export CPPFLAGS="-I/opt/homebrew/include"
   export LDFLAGS="-L/opt/homebrew/lib"
 
   # Solves glpk issue in cvxopt
@@ -27,8 +27,13 @@ function install_macos() {
 }
 
 function install_linux() {
-  sudo apt-get update
-  sudo apt-get install -y libgsl-dev libfftw3-dev libsuitesparse-dev libglpk-dev
+  apt-get update
+  apt-get install -y build-essential python-dev libopenblas-dev libatlas-base-dev libblas-dev liblapack-dev libdsdp-dev libsuitesparse-dev
+  export CPPFLAGS="-I/usr/include/suitesparse"
+
+  export CVXOPT_BUILD_FFTW=1
+  export CVXOPT_BUILD_GLPK=1
+  export CVXOPT_BUILD_GSL=1
 }
 
 if [ "$PLATFORM" == "macos" ]; then
