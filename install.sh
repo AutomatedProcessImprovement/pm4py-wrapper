@@ -9,11 +9,6 @@ fi
 
 git submodule update --init --recursive
 
-python3 -m venv venv
-source venv/bin/activate
-python -m pip install --upgrade pip
-pip install poetry
-
 function install_macos() {
   # Solves openblas issue
   brew install gsl fftw suite-sparse glpk
@@ -27,10 +22,10 @@ function install_macos() {
 }
 
 function install_linux() {
-  apt-get update
-  apt-get install -y \
+  apt update
+  apt install -y \
     build-essential \
-    python-dev \
+    python3-dev \
     libopenblas-dev \
     libatlas-base-dev \
     libblas-dev \
@@ -42,6 +37,11 @@ function install_linux() {
     libgsl-dev \
     libfftw3-dev \
     libglpk-dev
+# git \
+# python3.9 \
+# python3.9-venv
+# python3-pip
+
   export CPPFLAGS="-I/usr/include/suitesparse"
 
   export CVXOPT_BUILD_FFTW=1
@@ -55,4 +55,8 @@ elif [ "$PLATFORM" == "linux" ]; then
   install_linux
 fi
 
+python3.9 -m venv venv
+source venv/bin/activate
+pip3.9 install --upgrade pip
+pip3.9 install poetry
 poetry install
