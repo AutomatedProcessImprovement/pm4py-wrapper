@@ -1,4 +1,5 @@
 from pathlib import Path
+from xml.etree import ElementTree
 
 import pandas as pd
 import pm4py
@@ -19,3 +20,10 @@ def convert_csv_to_xes(csv_path: Path, output_path: Path):
     log = log_converter.apply(df, variant=log_converter.Variants.TO_EVENT_LOG)
     log_lifecycle = interval_lifecycle.to_lifecycle(log)
     xes_exporter.apply(log_lifecycle, str(output_path))
+
+    # fixing the timestamp XML tag after pm4py conversion
+    ElementTree.register_namespace('', 'http://www.xes-standard.org/')
+    root = ElementTree.parse(str(output_path))
+    for elem in root.findall(".//*[@key='time:timestamp']"):
+        elem.tag = 'date'
+    root.write(str(output_path), encoding='utf-8', xml_declaration=True)
