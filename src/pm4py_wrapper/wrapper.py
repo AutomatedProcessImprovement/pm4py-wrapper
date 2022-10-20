@@ -17,6 +17,11 @@ def convert_xes_to_csv(xes_path: Path, output_path: Path):
 
 def convert_csv_to_xes(csv_path: Path, output_path: Path):
     df = pd.read_csv(csv_path)
+
+    # drop all columns that start with @@
+    columns_to_drop = [name for name in df.columns if name.startswith('@@')]
+    df.drop(columns_to_drop, axis=1, inplace=True)
+
     log = log_converter.apply(df, variant=log_converter.Variants.TO_EVENT_LOG)
     log_lifecycle = interval_lifecycle.to_lifecycle(log)
     xes_exporter.apply(log_lifecycle, str(output_path))
