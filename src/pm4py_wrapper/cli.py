@@ -1,7 +1,6 @@
 from pathlib import Path
 
 import click
-from click import BaseCommand
 
 from pm4py_wrapper.wrapper import convert_xes_to_csv, convert_csv_to_xes
 

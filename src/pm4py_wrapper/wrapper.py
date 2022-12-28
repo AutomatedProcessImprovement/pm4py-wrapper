@@ -2,14 +2,14 @@ from pathlib import Path
 from xml.etree import ElementTree
 
 import pandas as pd
-import pm4py
 from pm4py.objects.conversion.log import converter as log_converter
-from pm4py.objects.log.util import interval_lifecycle
 from pm4py.objects.log.exporter.xes import exporter as xes_exporter
+from pm4py.objects.log.importer.xes import importer as xes_importer
+from pm4py.objects.log.util import interval_lifecycle
 
 
 def convert_xes_to_csv(xes_path: Path, output_path: Path):
-    log = pm4py.read_xes(str(xes_path))
+    log = xes_importer.apply(str(xes_path), variant=xes_importer.Variants.LINE_BY_LINE)
     log_interval = interval_lifecycle.to_interval(log)
     df = log_converter.apply(log_interval, variant=log_converter.Variants.TO_DATA_FRAME)
     df.to_csv(output_path, index=False)
